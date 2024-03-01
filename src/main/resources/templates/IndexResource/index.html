@@ -1,16 +1,6 @@
 {@java.lang.String name}
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/main.css" rel="stylesheet" />
-
-    <title>quarkus-qute</title>
-</head>
-<body>
-<span class="text">
-    Hello {name}
-</span>
-</body>
-</html>
+{#include base}
+    <span class="text">
+        Hello {name}
+    </span>
+{/include}
