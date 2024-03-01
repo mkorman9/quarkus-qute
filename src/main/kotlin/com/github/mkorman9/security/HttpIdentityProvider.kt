@@ -17,7 +17,7 @@ class HttpIdentityProvider : IdentityProvider<UsernamePasswordAuthenticationRequ
         context: AuthenticationRequestContext
     ): Uni<SecurityIdentity> {
         return if (request.password.password.contentEquals(PASSWORD.toCharArray())) {
-            return Uni.createFrom().item(
+            Uni.createFrom().item(
                 QuarkusSecurityIdentity.builder()
                     .setPrincipal(UserPrincipal(request.username))
                     .build()
