@@ -1,5 +1,6 @@
 package com.github.mkorman9
 
+import com.github.mkorman9.security.UserPrincipal
 import io.quarkus.qute.CheckedTemplate
 import io.quarkus.qute.TemplateInstance
 import io.quarkus.security.Authenticated
@@ -30,7 +31,7 @@ class IndexResource {
     fun admin(
         @Context securityIdentity: SecurityIdentity
     ): TemplateInstance {
-        return Templates.admin(securityIdentity.principal.name)
+        return Templates.admin(securityIdentity.principal as UserPrincipal)
     }
 
     @CheckedTemplate
@@ -39,6 +40,6 @@ class IndexResource {
         external fun index(name: String): TemplateInstance
         
         @JvmStatic
-        external fun admin(name: String): TemplateInstance
+        external fun admin(user: UserPrincipal): TemplateInstance
     }
 }

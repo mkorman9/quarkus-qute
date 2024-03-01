@@ -1,8 +1,8 @@
-{@java.lang.String name}
+{@com.github.mkorman9.security.UserPrincipal user}
 {#include base}
     {#title}quarkus-qute - admin{/title}
     <span class="text">
-        Hello {name}
+        Hello {user.getUsername()}
     </span>
     <small>
         Only admin can see this
