@@ -4,7 +4,6 @@ import com.github.mkorman9.security.UserPrincipal
 import io.quarkus.qute.CheckedTemplate
 import io.quarkus.qute.TemplateInstance
 import io.quarkus.security.Authenticated
-import io.quarkus.security.identity.SecurityIdentity
 import jakarta.ws.rs.Consumes
 import jakarta.ws.rs.DefaultValue
 import jakarta.ws.rs.GET
@@ -29,9 +28,9 @@ class IndexResource {
     @Path("/admin")
     @Authenticated
     fun admin(
-        @Context securityIdentity: SecurityIdentity
+        @Context userPrincipal: UserPrincipal
     ): TemplateInstance {
-        return Templates.admin(securityIdentity.principal as UserPrincipal)
+        return Templates.admin(userPrincipal)
     }
 
     @CheckedTemplate
