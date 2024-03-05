@@ -5,7 +5,6 @@ import io.quarkus.qute.CheckedTemplate
 import io.quarkus.qute.TemplateInstance
 import io.quarkus.security.Authenticated
 import jakarta.ws.rs.Consumes
-import jakarta.ws.rs.DefaultValue
 import jakarta.ws.rs.GET
 import jakarta.ws.rs.Path
 import jakarta.ws.rs.Produces
@@ -18,10 +17,16 @@ import jakarta.ws.rs.core.MediaType
 @Consumes(value = [])
 class IndexResource {
     @GET
-    fun index(
-        @QueryParam("name") @DefaultValue("world") name: String
+    fun index(): TemplateInstance {
+        return Templates.index()
+    }
+
+    @GET
+    @Path("/welcome")
+    fun welcome(
+        @QueryParam("name") name: String
     ): TemplateInstance {
-        return Templates.index(name)
+        return Templates.welcome(name)
     }
 
     @GET
@@ -36,8 +41,11 @@ class IndexResource {
     @CheckedTemplate
     object Templates {
         @JvmStatic
-        external fun index(name: String): TemplateInstance
-        
+        external fun index(): TemplateInstance
+
+        @JvmStatic
+        external fun welcome(name: String): TemplateInstance
+
         @JvmStatic
         external fun admin(user: UserPrincipal): TemplateInstance
     }
